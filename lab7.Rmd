@@ -1,0 +1,67 @@
+---
+title: "Lab 7"
+output: html_notebook
+author: Patricia Skora and Odalys Barrientos
+---
+
+# Lab 7: Five Scored and Several Months Ago
+
+## Patricia Skora and 
+
+## Part 1: Import and Look
+### Problem 1
+```{r}
+quiz <- read.csv('quiz.csv')
+plot(quiz)
+```
+The students' scores across quizzes do appear to be associated in the way that as more quizzes were taken, the scores seemed to be better. There are also more clusters in the plots than there are outliers, indicating that students are scoring around the same range.
+
+## Part 2
+### Problem 3
+```{r}
+quiz2 <- quiz[,1]
+quiz6 <- quiz[,5]
+plot(quiz2, quiz6, main = "Quiz 2 vs Quiz 6")
+```
+### Problem 4
+```{r}
+?cor #Pearson correlation is the default for cor()
+cor(quiz2, quiz6)
+```
+After running the Pearson correlation test using cor(), the correlation value is about .490 which is a positive association between the quiz percentages.
+
+### Problem 5
+```{r}
+#' A function that generates bootstrap estimates of the Pearson correlation between two vectors.
+#'
+#' @param x A vector.
+#' @param y A vector.
+#' @param B The number of bootstrap estimates of the Pearson correlation with a default value of 2000.
+#'
+#' @returns The B boostrap estimates of the Pearson correlation.
+parameters.boostrap <- function(x, B = 2000){
+  replicate(B, sample(length(x)))
+}
+bootstrap.cor <- function(x, y, B = 2000){
+  vals <- parameters.boostrap(x)
+  bootstrap.cors <- cor(x[vals], y[vals])
+  return(bootstrap.cors)
+}
+
+pearson <- bootstrap.cor(quiz2, quiz6)
+pearson
+```
+### Problem 6
+```{r}
+
+```
+
+### Problem 7
+
+## Part III: The "It" Factor
+### Problem 8
+```{r}
+cov.mat <- cov(quiz)
+cov.mat
+```
+
