@@ -108,8 +108,10 @@ The proportion of the variance captured by the first principal component is .64.
 #'
 #' @returns The B bootstrap estimates of the eigenratio.
 bootstrap.eigenratio <- function(mat, B = 2000){
-  
+  vals <- replicate(B,mat[sample(1:nrow(mat), replace = TRUE),])
+  return(vals)
 }
+bootstrap.eigenratio(quiz)
 ```
 
 ### Problem 13
