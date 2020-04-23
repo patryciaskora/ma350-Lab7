@@ -75,8 +75,10 @@ These confidence intervals are close however, the quantile function does not cov
 cov.mat <- cov(quiz)
 cov.mat
 cov.mat[1,2] # (1,2) entry
-cov(quiz2, quiz6) 
+quiz3 <- quiz[,2]
+cov(quiz2, quiz3) 
 ```
+The (1,2) entry in cov.mat matches the covariance you get when you calculate quiz2 and quiz3's covariance using cov(), being 230.7018.
 
 ### Problem 9
 ```{r}
