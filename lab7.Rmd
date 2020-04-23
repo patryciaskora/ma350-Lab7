@@ -90,3 +90,30 @@ These eigen values are sorted from largest eigen value to the smallest eigen val
 sum(eigen.vals) 
 sum(diag(cov.mat))
 ```
+
+### Problem 11 
+```{r}
+eigenratio <- eigen.vals[1]/sum(eigen.vals)
+eigenratio
+```
+The proportion of the variance captured by the first principal component is .64.
+
+### Problem 12
+```{r}
+#' A function that generates bootstrap estimates of the eigenratio useing the case resampling
+#' bootstrap on a data frame.
+#' 
+#' @params mat A data frame.
+#' @params B The number of bootstrap samples to generate, with a default value of 2000.
+#'
+#' @returns The B bootstrap estimates of the eigenratio.
+bootstrap.eigenratio <- function(mat, B = 2000){
+  
+}
+```
+
+### Problem 13
+```{r}
+
+```
+
