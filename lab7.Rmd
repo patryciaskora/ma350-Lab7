@@ -74,6 +74,7 @@ These confidence intervals are close however, the quantile function does not cov
 ```{r}
 cov.mat <- cov(quiz)
 cov.mat
+
 cov.mat[1,2] # (1,2) entry
 quiz3 <- quiz[,2]
 cov(quiz2, quiz3) 
@@ -102,7 +103,7 @@ The proportion of the variance captured by the first principal component is .64.
 
 ### Problem 12
 ```{r}
-#' A function that generates bootstrap estimates of the eigenratio useing the case resampling
+#' A function that generates bootstrap estimates of the eigenratio using the case resampling
 #' bootstrap on a data frame.
 #' 
 #' @params mat A data frame.
@@ -110,14 +111,21 @@ The proportion of the variance captured by the first principal component is .64.
 #'
 #' @returns The B bootstrap estimates of the eigenratio.
 bootstrap.eigenratio <- function(mat, B = 2000){
-  vals <- replicate(B,mat[sample(1:nrow(mat), replace = TRUE),])
-  return(vals)
+  samples <- replicate(B,sample(ncol(mat), replace = TRUE))
+  eigen.vals <- vector()
+  for(i in 1:B){
+    j <- samples[,i]
+    eigen.vals[i] <- max(eigen(cov(mat[j,j]))$values)/sum(eigen(cov(mat[j,j]))$values)
+  }
+  return(eigen.vals)
 }
-bootstrap.eigenratio(quiz)
+
 ```
 
 ### Problem 13
 ```{r}
+eigen.bootest <- bootstrap.eigenratio(mat=quiz, B=5000)
+
+quantile(eigen.bootest, c(0.025,0.975))
 
 ```
-
