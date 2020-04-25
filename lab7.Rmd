@@ -119,13 +119,12 @@ bootstrap.eigenratio <- function(mat, B = 2000){
   }
   return(eigen.vals)
 }
-
+bootstrap.eigenratio(cov.mat)
 ```
 
 ### Problem 13
 ```{r}
 eigen.bootest <- bootstrap.eigenratio(mat=quiz, B=5000)
-
-quantile(eigen.bootest, c(0.025,0.975))
+quantile(eigen.bootest, c(0.025,0.975), na.rm = TRUE)
 
 ```
